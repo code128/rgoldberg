@@ -9,6 +9,10 @@ def hello():
     who = request.args.get("who", "World")
     return f"Hello {who}!\n"
 
+def dispatchToCloudTasks():
+    return
+
+
 
 if __name__ == "__main__":
     # Used when running locally only. When deploying to Cloud Run,

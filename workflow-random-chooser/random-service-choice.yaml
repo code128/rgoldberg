@@ -1,0 +1,9 @@
+- whichServiceStyleShouldIuse:
+    call: http.get
+    args:
+        url: https://api.mathjs.org/v4/
+        query:
+            expr: ${"pickRandom(['App Engine','Cloud Run','Cloud Function'])"}
+    result: serviceToUse
+- returnResult:
+    return: ${serviceToUse}
