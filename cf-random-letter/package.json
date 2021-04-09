@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "start": "npx functions-framework --target=random_letter [--signature-type=http]"
+    },
+    "devDependencies": {
+        "@google-cloud/functions-framework": "^1.7.1"
+    },
+    "dependencies": {
+        "escape-html": "^1.0.3"
+    }
+}
