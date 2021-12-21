@@ -8,8 +8,12 @@ provider "google" {
 }
 
 module "function" {
-  source      = "../../modules/function"
+  source      = "../../modules/cloud-functions"
   project     = var.project
   name        = "production-app"
   entry_point = "random_letter"
+}
+
+module "run" {
+  source      = "../../modules/cloud-run"
 }
