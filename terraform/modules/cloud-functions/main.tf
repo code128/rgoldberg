@@ -1,3 +1,7 @@
+variable "project" {}
+variable "name" {}
+variable "entry_point" {}
+
 locals {
   timestamp = formatdate("YYMMDDhhmmss", timestamp())
 }
@@ -62,4 +66,8 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
 
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
+}
+
+output "function_url" {
+  value = google_cloudfunctions_function.function.https_trigger_url
 }
