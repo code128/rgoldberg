@@ -1,0 +1,41 @@
+main:
+    params: [input]
+    steps:
+    - assign_sentence:
+        assign:
+            - test_sentence: "There is only one Lord of the Ring and he does not share power"
+            - new_sentence: ""
+    - sentence_loop:
+        for:
+            value: x
+            range: [1, '${len(test_sentence)}']
+            steps:
+                - get_execution_url:
+                    call: get_executor
+                    result: serviceURL
+                - getNewChar:
+                    call: http.get
+                    args:
+                        url: "https://us-central1-striking-coil-320623.cloudfunctions.net/production-app"
+                    result: newChar
+                - concat:
+                    assign:
+                        - new_sentence: ${new_sentence + newChar.body}
+    - returnStep:
+          return: ${new_sentence}
+
+get_executor:
+    steps:
+        - first:
+            call: http.get
+            args:
+                url: https://api.mathjs.org/v4/
+                query:
+                    expr: ${"pickRandom(['https://us-central1-striking-coil-320623.cloudfunctions.net/production-app'])"}
+            result: serviceURL
+        - log:
+            call: sys.log
+            args:
+                data: ${serviceURL.body}            
+        - second:
+            return: ${serviceURL.body}
