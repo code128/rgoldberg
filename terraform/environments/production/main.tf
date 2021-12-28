@@ -17,3 +17,14 @@ module "function" {
 module "run" {
   source      = "../../modules/cloud-run"
 }
+
+output "function_url" {
+  value = module.function.function_url
+}
+
+terraform {
+  backend "gcs" {
+    bucket = "striking-coil-320623-tfstate"
+    prefix = "env/production"
+  }
+}
