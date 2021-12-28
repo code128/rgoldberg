@@ -1,0 +1,18 @@
+main:
+  params: [args]
+  steps:
+  - initArgs:
+      assign:
+        - jobID: args.jobID
+        - startTime: args.startTime
+        - intendedCharacter: args.intendedCharacter
+        - characterPosition: args.characterPosition
+  - whichService:
+        call: http.get
+        args:
+            url: https://api.mathjs.org/v4/
+            query:
+                expr: ${"pickRandom(['AE','CF','CR'])"}
+        result: randService 
+  - return_result:
+      return: ${randService.body}
