@@ -14,13 +14,19 @@ module "function" {
   entry_point = "random_letter"
 }
 
+output "function_url" {
+  value = module.function.function_url
+}
+
+
 module "run" {
   source      = "../../modules/cloud-run"
 }
 
-output "function_url" {
-  value = module.function.function_url
+module "workflow" {
+  source      = "../../modules/workflows"
 }
+
 
 terraform {
   backend "gcs" {

@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"run","Source":"../../modules/cloud-run","Dir":"../../modules/cloud-run"},{"Key":"","Source":"","Dir":"."},{"Key":"function","Source":"../../modules/cloud-functions","Dir":"../../modules/cloud-functions"}]}
+{"Modules":[{"Key":"run","Source":"../../modules/cloud-run","Dir":"../../modules/cloud-run"},{"Key":"","Source":"","Dir":"."},{"Key":"function","Source":"../../modules/cloud-functions","Dir":"../../modules/cloud-functions"},{"Key":"workflow","Source":"../../modules/workflows","Dir":"../../modules/workflows"}]}
