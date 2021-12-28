@@ -10,13 +10,13 @@ main:
             value: x
             range: [1, '${len(test_sentence)}']
             steps:
-                - get_execution_url:
+                - get_executor:
                     call: get_executor
                     result: serviceURL
                 - getNewChar:
                     call: http.get
                     args:
-                        url: "https://us-central1-striking-coil-320623.cloudfunctions.net/production-app"
+                        url: ${serviceURL}
                     result: newChar
                 - concat:
                     assign:
@@ -31,11 +31,19 @@ get_executor:
             args:
                 url: https://api.mathjs.org/v4/
                 query:
-                    expr: ${"pickRandom(['https://us-central1-striking-coil-320623.cloudfunctions.net/production-app'])"}
-            result: serviceURL
-        - log:
-            call: sys.log
-            args:
-                data: ${serviceURL.body}            
+                    expr: ${"pickRandom([1,2,3])"}
+            result: randomPick
         - second:
-            return: ${serviceURL.body}
+            switch:
+            - condition: ${int(randomPick.body) == 1}
+              next: return_AE
+            - condition:  ${int(randomPick.body) == 2}
+              next: return_CF
+            - condition:  ${int(randomPick.body) == 3}
+              next: return_CR
+        - return_AE:
+            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+        - return_CF:
+            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+        - return_CR:
+            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
