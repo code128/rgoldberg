@@ -13,11 +13,29 @@ main:
                 - get_executor:
                     call: get_executor
                     result: serviceURL
+                - log:
+                    call: sys.log
+                    args:
+                        data:  ${"currentX:" + string(x)}
                 - getNewChar:
                     call: http.get
                     args:
                         url: ${serviceURL}
                     result: newChar
+                - log2:
+                    call: sys.log
+                    args:
+                        data: ${"newChar:" + newChar.body}
+                - log3:
+                    call: sys.log
+                    args:
+                        data: ${"SubStr:" + text.substring(test_sentence, x-1, 1)}
+                - checkForCorrectCharacter:
+                    switch:
+                    - condition: ${newChar.body == text.substring(test_sentence, x-1, 1)}
+                      next: concat
+                    - condition: ${newChar.body != text.substring(test_sentence, x-1, 1)}
+                      next: get_executor
                 - concat:
                     assign:
                         - new_sentence: ${new_sentence + newChar.body}
@@ -46,4 +64,4 @@ get_executor:
         - return_CF:
             return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
         - return_CR:
-            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+            return: https://cr-random-letter-2itmkz3yga-uc.a.run.app/            
