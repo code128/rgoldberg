@@ -3,7 +3,7 @@ main:
     steps:
     - assign_sentence:
         assign:
-            - test_sentence: "There is only one Lord of the Ring and he does not share power"
+            - test_sentence: "The"
             - new_sentence: ""
     - sentence_loop:
         for:
@@ -29,12 +29,12 @@ main:
                 - log3:
                     call: sys.log
                     args:
-                        data: ${"SubStr:" + text.substring(test_sentence, x-1, 1)}
+                        data: ${"SubStr:" + text.substring(test_sentence, x-1, x)}
                 - checkForCorrectCharacter:
                     switch:
-                    - condition: ${newChar.body == text.substring(test_sentence, x-1, 1)}
+                    - condition: ${newChar.body == text.substring(test_sentence, x-1, x)}
                       next: concat
-                    - condition: ${newChar.body != text.substring(test_sentence, x-1, 1)}
+                    - condition: ${newChar.body != text.substring(test_sentence, x-1, x)}
                       next: get_executor
                 - concat:
                     assign:
@@ -64,4 +64,4 @@ get_executor:
         - return_CF:
             return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
         - return_CR:
-            return: https://cr-random-letter-2itmkz3yga-uc.a.run.app/            
+            return: https://cr-random-letter-2itmkz3yga-uc.a.run.app/
