@@ -1,12 +1,9 @@
-## Backing services now check and return when they hit the intended character 
-## along with a count of tries to get it.
-
 main:
     params: [input]
     steps:
     - assign_sentence:
         assign:
-            - test_sentence: "There is only one Lord of the Ring and he does not share power!"
+            - test_sentence: "There is only one Lord of the Ring and he does not share power"
             - new_sentence: ""
     - sentence_loop:
         for:
