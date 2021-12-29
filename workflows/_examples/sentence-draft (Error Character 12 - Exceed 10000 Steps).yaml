@@ -1,5 +1,3 @@
-## For this example update the backing services to do the intended character comparison and return when they get it correct along with a count of tries to get it 
-
 main:
     params: [input]
     steps:
