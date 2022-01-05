@@ -8,8 +8,12 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz012345678
  *                     More info: https://expressjs.com/en/api.html#res
  */
 exports.random_letter = (req, res) => {
-    if (!req.query.intendedCharacter) { //Send a random character if there's no passed in intended
+    if (!req.query.intendedCharacter) { //Send a random character if there's no passed in character intended
         res.send(alphabet[Math.floor(Math.random() * alphabet.length)])
+    }
+
+    if (!req.query.executionID) { 
+        req.query.executionID = "00000";
     }
 
     var match = false;
@@ -22,7 +26,8 @@ exports.random_letter = (req, res) => {
             match = true;
         }
     }
-    res.json( {"intendedCharacter":req.query.intendedCharacter, 
+    res.json( {"executionID":req.query.executionID,
+                "intendedCharacter":req.query.intendedCharacter, 
                 "randomCharacter":random_letter, 
                 "iterationCount":iterationCounter}); 
 };

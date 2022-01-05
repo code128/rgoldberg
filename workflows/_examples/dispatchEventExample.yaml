@@ -1,0 +1,18 @@
+# This workflow demonstrates how to use the Cloud Pub/Sub connector.
+
+- init:
+    assign:
+    - project: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+    - topic: "rube-events"
+    - subscription: "rube-events"
+    - message: {"hello": "world"}  # An object used as a secret.
+    - base64Msg: ${base64.encode(json.encode(message))}
+- publish_message_to_topic:
+    call: googleapis.pubsub.v1.projects.topics.publish
+    args:
+      topic: ${"projects/" + project + "/topics/" + topic}
+      body:
+        messages:
+        - data: ${base64Msg}
+- the_end:
+    return: "SUCCESS"
