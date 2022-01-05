@@ -1,0 +1,18 @@
+
+main:
+    params: [args]
+    steps:
+    - assignStep:
+        assign:
+            - intendedCharacter: ${args.intendedCharacter}
+            - executionID: ${args.executionID}
+    - getNewChar:
+        call: http.get
+        args:
+            url: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+            query:
+                intendedCharacter: ${intendedCharacter}
+                executionID: ${executionID}
+        result: newChar
+    - returnOutput:
+        return: ${newChar.body}
