@@ -1,0 +1,91 @@
+main:
+    params: [input]
+    steps:
+    - assign_variables:
+        assign:
+            - test_sentence: "I must not fear. Fear is the mind killer."
+            - return_sentence: ""
+            - character_list: []
+            - project: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+            - topic: "rube-events"
+            - subscription: "rube-events"
+            - execution_id: ${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}
+    - sentence_loop:
+        for:
+            value: x
+            range: [1, '${len(test_sentence)}']
+            steps:
+                - get_executor:
+                    call: get_executor
+                    result: serviceURL
+                - assignVars:
+                    assign:
+                    - intendedCharacter: ${text.substring(test_sentence, x-1, x)}
+                - log0:
+                    call: sys.log
+                    args:
+                        data:  ${"Trying :" + serviceURL}                    
+                - log:
+                    call: sys.log
+                    args:
+                        data:  ${"currentX:" + string(x)}
+                - getNewChar:
+                    call: http.get
+                    args:
+                        url: ${serviceURL}
+                        query:
+                            intendedCharacter: ${intendedCharacter}
+                            executionID: ${execution_id}
+                    result: newChar
+                - log2:
+                    call: sys.log
+                    args:
+                        data: ${newChar.body}
+                - log3:
+                    call: sys.log
+                    args:
+                        data: ${"SubStr:" + intendedCharacter}
+                - log4:
+                    call: sys.log
+                    args:
+                        data: ${character_list}
+                - assignStep:
+                    assign:
+                    - base64Msg: ${base64.encode(json.encode(newChar.body))}                        
+                - publish_message_to_topic:
+                    call: googleapis.pubsub.v1.projects.topics.publish
+                    args:
+                        topic: ${"projects/" + project + "/topics/" + topic}
+                        body:
+                            messages:    
+                            - data: ${base64Msg}
+                - concat:
+                    assign:
+                        - character_list: ${list.concat(character_list, newChar.body)}
+                        - return_sentence: ${return_sentence + newChar.body.randomCharacter}
+    - returnStep:
+          return: ${return_sentence}
+
+get_executor:
+    steps:
+        - first:
+            call: http.get
+            args:
+                url: https://api.mathjs.org/v4/
+                query:
+                    expr: ${"pickRandom([1,2,3])"}
+            result: randomPick
+        - second:
+            switch:
+            - condition: ${int(randomPick.body) == 1}
+              next: return_CF
+            - condition:  ${int(randomPick.body) == 2}
+              next: return_CF
+            - condition:  ${int(randomPick.body) == 3}
+              next: return_CF
+        - return_AE:
+            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+        - return_CF:
+            return: https://us-central1-striking-coil-320623.cloudfunctions.net/production-app
+        - return_CR:
+            return: https://cr-random-letter-2itmkz3yga-uc.a.run.app/
