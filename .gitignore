@@ -6,3 +6,4 @@ terraform.tfstate.backup
 .terraform/providers/registry.terraform.io/hashicorp/google/4.5.0/darwin_amd64/terraform-provider-google_v4.5.0_x5
 .DS_Store
 .vscode/launch.json
+*.venv
