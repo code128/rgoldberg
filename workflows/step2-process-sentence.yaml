@@ -8,7 +8,7 @@ main:
             - sentence: ${input.sentence}
             - fs_document: ${input.fs_document} 
             - character_list: []
-            - return_sentence: ""            
+            - return_sentence: ""                       
     - sentence_loop:
         for:
             value: x
