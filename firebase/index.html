@@ -94,6 +94,7 @@ body {
     }
 
     function sendSentence() {
+        document.getElementById("submitButton").disabled = true; //disable the button for now 
         var requestOptions = {
             method: 'POST'
         };
