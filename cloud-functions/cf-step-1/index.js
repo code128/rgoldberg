@@ -32,7 +32,7 @@
           if (!workflowsAPI.success) {
             return res.status(400).send(`Error running workflow. Result: ${workflowsAPI.result}`)
           }
-          res.send(`Result: ${workflowsAPI.result}`);
+          res.send(workflowsAPI.result);
         };
         
         const {ExecutionsClient} = require('@google-cloud/workflows');
