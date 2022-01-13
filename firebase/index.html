@@ -5,7 +5,10 @@
 <meta charset="utf-8">
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style/flapstyle.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+    </style>
+<link rel="stylesheet" href="style/main.css">
 </head>
 <body>
     <script type="module">
@@ -36,7 +39,6 @@
         let charCounterString = "characterCheckNumber" + returnCharCounter.toString();
         console.log(doc.get(charCounterString))
         try {
-            document.getElementById("result").innerHTML += doc.get(charCounterString)["randomCharacter"];
             //Find the correct flipper and set the value
             let flaps = document.getElementsByClassName("splitflap");
             let flapDiv = flaps[returnCharCounter-1];
@@ -44,7 +46,8 @@
             flapDiv.children[1].innerText = doc.get(charCounterString)["randomCharacter"]
             flapDiv.children[2].innerText = doc.get(charCounterString)["randomCharacter"]
             flapDiv.children[3].innerText = doc.get(charCounterString)["randomCharacter"]
-            flapDiv.dataset["animated"] = 0;
+            // flapDiv.appendChild(@)
+            flapDiv.dataset["animated"] = 0; //The animation loop stops when this is set. 
         }
         catch {
 
@@ -78,9 +81,15 @@
 
         fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-2", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+            .then(result => console.log(result) )
+            .catch(error => handleFetchError(error));
     }
+
+    function handleFetchError(result) {
+        console.log(result)
+        alert("Hey, sorry about this but something went wrong. You should reload the page and try again.");
+    }
+    
 
     function sendSentence() {
         document.getElementById("submitButton").disabled = true; //disable the button for now 
@@ -91,7 +100,7 @@
         fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-1", requestOptions)
             .then(response => response.text())
             .then(result => setupFireStoreDocument(result))
-            .catch(error => console.log('error', error));
+            .catch(error => handleFetchError(error));
     
         createFlapSpots(document.getElementById("sentence_input").value);
     }
@@ -99,6 +108,7 @@
     function pageSetup() {
         //Hookup event handling
         document.getElementById("submitButton").onclick = sendSentence;
+        document.getElementById("sentence_input").focus();
     }
     
     pageSetup();
@@ -106,20 +116,15 @@
     </script>
     
     <div>
-        <div class="child">
-            <label for="sentence">Update the sentence below to what you would like to match:</label><br>
-            <input type="text" id="sentence_input" name="sentence" value="You Shall"><br>
-            <input id ="submitButton" type="submit" value="Match">
+        <div class="instructions">
+            <input type="text" id="sentence_input" name="sentence" value="You Shall Not Pass!"><br>
+            <label for="sentence">Update the sentence above to what you would like to match:</label><br>
+            <input id ="submitButton" type="submit" value="Start the Machine">
         </div>
-      </div>
+    </div>
 
-      <div class="center">
-        </div>
-    
-
-      <div>
-        <p id="result"></p>
-      </div>
+    <div class="center">
+    </div>
 
       <script src="js/flapscript.js"></script>
 </body>

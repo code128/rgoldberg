@@ -68,11 +68,14 @@ function createFlapSpots(sentence) {
     if (a1[x].parentElement.dataset["animated"] == 0) {
       return;
     }
-    a1[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-    a2[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-    b1[x].innerHTML = char[strCount[x]];
-    b2[x].innerHTML = char[strCount[x]];
 
+    newChar1 = randChar()
+    newChar2 = randChar()
+    a2[x].innerHTML = newChar1;
+    a1[x].innerHTML = newChar1;
+    b1[x].innerHTML = newChar2;
+    b2[x].innerHTML = newChar2;
+  
     a2[x].classList.remove("flip1");
     a2[x].offsetWidth = a2[x].offsetWidth;
     a2[x].classList.add("flip1");
@@ -87,24 +90,10 @@ function createFlapSpots(sentence) {
   function dontFlipIt(x) {
     flag[x] = true;
     a2[x].classList.remove("flip2");
-    a2[x].style.backgroundColor = "#3BB6eB";
-    b2[x].style.backgroundColor = "#3BB6eB";
+    // a2[x].style.backgroundColor = "#3BB6eB";
+    // b2[x].style.backgroundColor = "#3BB6eB";
     a1[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
     a2[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
   }
 
-//   function changeDestination() {
-//     setTimeout(function() {
-//       flag.fill(false);
-//       flag2 = true;
-      
-//       var tempArr = endStr.slice();
-//       endStr = beginStr.slice();
-//       beginStr = tempArr.slice();
-//     }, 3000);
-// }
-
-
 }
-
-
