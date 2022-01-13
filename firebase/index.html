@@ -5,25 +5,7 @@
 <meta charset="utf-8">
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-body {
-    background-color: rgba(66, 171, 171, 0.454);
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-    font-size: x-large;
-}
-.center #sentence {
-    font-size: x-large;
-    border: none;
-    width: 600px;
-    padding-top: 30px;
-}
-
-</style>
+<link rel="stylesheet" href="style/flapstyle.css">
 </head>
 <body>
     <script type="module">
@@ -49,13 +31,20 @@ body {
     let returnCharCounter = 0;
 
     function addCharacters(doc) {
-        //console.log("Current data: ", doc.data());
         //Try to find the next character each time.
         
         let charCounterString = "characterCheckNumber" + returnCharCounter.toString();
         console.log(doc.get(charCounterString))
         try {
             document.getElementById("result").innerHTML += doc.get(charCounterString)["randomCharacter"];
+            //Find the correct flipper and set the value
+            let flaps = document.getElementsByClassName("splitflap");
+            let flapDiv = flaps[returnCharCounter-1];
+            flapDiv.children[0].innerText = doc.get(charCounterString)["randomCharacter"]
+            flapDiv.children[1].innerText = doc.get(charCounterString)["randomCharacter"]
+            flapDiv.children[2].innerText = doc.get(charCounterString)["randomCharacter"]
+            flapDiv.children[3].innerText = doc.get(charCounterString)["randomCharacter"]
+            flapDiv.dataset["animated"] = 0;
         }
         catch {
 
@@ -103,6 +92,8 @@ body {
             .then(response => response.text())
             .then(result => setupFireStoreDocument(result))
             .catch(error => console.log('error', error));
+    
+        createFlapSpots(document.getElementById("sentence_input").value);
     }
 
     function pageSetup() {
@@ -114,18 +105,22 @@ body {
     
     </script>
     
-    <div class="center">
+    <div>
         <div class="child">
             <label for="sentence">Update the sentence below to what you would like to match:</label><br>
-            <input type="text" id="sentence_input" name="sentence" value="You Shall Not Pass!"><br>
+            <input type="text" id="sentence_input" name="sentence" value="You Shall"><br>
             <input id ="submitButton" type="submit" value="Match">
         </div>
       </div>
 
       <div class="center">
+        </div>
+    
+
+      <div>
         <p id="result"></p>
-      </div>      
+      </div>
 
-
+      <script src="js/flapscript.js"></script>
 </body>
 </html>

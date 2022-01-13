@@ -1,0 +1,127 @@
+body {
+  background-color: #FCF8E1;
+}
+
+body {
+  background-color: rgba(66, 171, 171, 0.454);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+}
+.center #sentence {
+  font-size: x-large;
+  border: none;
+  width: 600px;
+  padding-top: 30px;
+}
+
+.splitflap {
+  position: relative;
+  min-width: 50px;
+  height: 50px;
+  margin: 1px;
+  line-height: 50px;
+  font-size: 48px;
+  font-family: Monospace;
+  text-align: center;
+  color: white;
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.top {
+  position: relative;
+  height: 50%;
+  width: 100%;
+  background-color: #3BB6EB;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+div {
+  perspective: 500px;
+}
+
+.bottom {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin-top: -50%;
+  border-radius: 10px 10px 10px 10px;
+  z-index: -1;
+  background-color: black;
+  background-image: linear-gradient(rgba(59, 182, 235, 0), #3BB6EB);
+  transform-origin: center;
+}
+
+.nextHalf {
+  position: relative;
+  height: 50%;
+  width: 100%;
+  margin-top: -100%;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  z-index: 2;
+  background-color: black;
+  background-image: linear-gradient(#3BB6EB, rgba(59, 182, 235, 0));
+  transform-origin: bottom;
+}
+
+.nextFull {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: #3BB6EB;
+  margin-top: -50%;
+  border-radius: 10px 10px 10px 10px;
+  z-index: -3;
+}
+
+.flip1 {
+  animation: flip1 ease-in 1;
+  animation-duration: 1s;
+}
+
+.flip2 {
+  animation: flip2 ease-out 1;
+  animation-duration: 1s;
+}
+
+@keyframes flip1 {
+  0% {
+    transform: rotateX(0deg);
+    background-color: #3BB6EB;
+  }
+  50% {
+    transform: rotateX(90deg);
+    background-color: black;
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+@keyframes flip2 {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  50% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+    background-color: #3BB6EB;
+  }
+}
