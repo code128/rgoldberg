@@ -1,4 +1,5 @@
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz0123456789.!";
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz0123456789!\"#$%&'()*+,-./:;<=>?@[] ^_`{|}~";
+
 /**
  * HTTP Cloud Function.
  *
@@ -7,6 +8,7 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz012345678
  * @param {Object} res Cloud Function response context.
  *                     More info: https://expressjs.com/en/api.html#res
  */
+
 exports.random_letter = (req, res) => {
     if (!req.query.intendedCharacter) { //Send a random character if there's no passed in character intended
         res.send(alphabet[Math.floor(Math.random() * alphabet.length)])
