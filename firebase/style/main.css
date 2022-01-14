@@ -13,6 +13,7 @@ body {
 }
 .instructions input {
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: x-large;
 }
 .instructions input[type=text] {

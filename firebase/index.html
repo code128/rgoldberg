@@ -15,6 +15,9 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js'
     import { getFirestore, collection, getDocs, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js'
 
+    let sentences = ["You Shall Not Pass!", "Fear is the mind-killer", 
+        "Welcome to the jungle", "Safety third"];
+
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyA7qdZKWosZtMSdXYNgEyfR_W4nYDUL74E",
@@ -109,6 +112,8 @@
         //Hookup event handling
         document.getElementById("submitButton").onclick = sendSentence;
         document.getElementById("sentence_input").focus();
+        //Pick a random starting sentence
+        document.getElementById("sentence_input").value = sentences[Math.floor(Math.random()*sentences.length)]
     }
     
     pageSetup();
@@ -118,7 +123,7 @@
     <div>
         <div class="instructions">
             <input type="text" id="sentence_input" name="sentence" value="You Shall Not Pass!"><br>
-            <label for="sentence">Update the sentence above to what you would like to match:</label><br>
+            <label for="sentence">Update the sentence ⬆ to what you would like to match:</label><br>
             <input id ="submitButton" type="submit" value="Start the Machine">
         </div>
     </div>
