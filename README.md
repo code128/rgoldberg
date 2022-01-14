@@ -17,3 +17,17 @@ Guessing all of them in the correct order would take more time then we have left
 - Workflows 
     - 1st workflow creates a firestore document
     - 2nd workflow breaks the sentence into characters and farms it via parallel iteration across AE, CF, CR and writes results to firestore
+
+# Features to think about adding
+- Another guesser based on a quantum processor
+- Some kind of analytics process to count and display some statistics of usage
+
+# Products to think about integrating
+- Cloud Scheduler (trigger analytics jobs?)
+- EventArc 
+- Cloud Build (CI/CD Pipeline for everything)
+- Cloud Storage (move site hosting here?)
+- Cloud Tasks? 
+- Cloud Logging
+    - SLO monitoring/alerting? 
+- Pub/Sub 
