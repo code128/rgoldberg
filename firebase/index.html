@@ -15,7 +15,7 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js'
     import { getFirestore, collection, getDocs, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js'
 
-    let sentences = ["You Shall Not Pass!", "Fear is the mind-killer", 
+    let sentences = ["You Shall Not Pass!", "I must not fear, fear is the mind-killer.", 
         "Welcome to the jungle", "Safety third"];
 
     // Your web app's Firebase configuration
@@ -122,7 +122,7 @@
     
     <div>
         <div class="instructions">
-            <input type="text" id="sentence_input" name="sentence" value="You Shall Not Pass!"><br>
+            <input type="text" id="sentence_input" name="sentence"><br>
             <label for="sentence">Update the sentence ⬆ to what you would like to match:</label><br>
             <input id ="submitButton" type="submit" value="Start the Machine">
         </div>
