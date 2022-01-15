@@ -1,5 +1,5 @@
 body {
-  background-color: rgba(66, 171, 171, 0.454);
+  background-color: #42abab74;
   color: rgb(0 101 189);
   margin-top: 30px;
   margin-left: 30px;
@@ -62,6 +62,27 @@ input:focus {
   color: white;
 }
 
+.splitflap img {
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  z-index: 10;
+}
+
+.nodisplay {
+  visibility: hidden;
+}
+
+.splitflap p {
+  color: white;
+  font-size: 11px;
+  position: absolute;
+  top: 9px;
+  right: 2px;
+}
+
 .top {
   position: relative;
   height: 50%;
@@ -109,6 +130,14 @@ div {
   margin-top: -50%;
   border-radius: 10px 10px 10px 10px;
   z-index: -3;
+}
+
+.key {
+  margin-top: 20px;
+}
+
+.animation {
+  margin-top: 40px;
 }
 
 .flip1 {

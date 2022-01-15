@@ -23,7 +23,14 @@ function createFlapSpots(sentence) {
   div = document.querySelector(".center");
   html = "";
   for (var x = 0; x < amountOfFlaps; x++) {
-    html += '<div class="splitflap" data-animated=1><div class="top"></div><div class="bottom"></div><div class="nextHalf"></div><div class="nextFull"></div></div>';
+    html += `<div class="splitflap" data-animated=1>
+                  <img id="logo" class="nodisplay"></img>
+                  <p id="iterationCount"></p>
+                  <div class="top"></div>
+                  <div class="bottom"></div>
+                  <div class="nextHalf"></div>
+                  <div class="nextFull"></div>
+            </div>`;
   }
   div.innerHTML = html;
 
@@ -50,12 +57,7 @@ function createFlapSpots(sentence) {
   // Flip them flaps /////////////////////////////////////////
   setInterval(function() {
     for (var x = 0; x < amountOfFlaps; x++) {
-
       flipIt(x);
-
-      // if (flag.every(function(e) {
-      //     return e
-      //   }) && flag2) flag2 = false, changeDestination();
     }
 
   }, speed * 1000);

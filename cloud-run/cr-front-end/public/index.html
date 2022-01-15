@@ -36,6 +36,23 @@
     let sentence = "";
     let returnCharCounter = 0;
 
+    function whichIcon(abbr) {
+        switch (abbr) {
+            case "CF":
+                return "img/icons/cloud_functions.png";                
+            break;
+            case "CR":
+                return "img/icons/cloud_run.png";                
+            break;
+            case "AE":
+                return "img/icons/app_engine.png";                
+            break;
+            default:
+                return "img/icons/cloud_functions.png";
+                break;
+        }
+    }
+
     function addCharacters(doc) {
         //Try to find the next character each time.
         
@@ -45,11 +62,16 @@
             //Find the correct flipper and set the value
             let flaps = document.getElementsByClassName("splitflap");
             let flapDiv = flaps[returnCharCounter-1];
-            flapDiv.children[0].innerText = doc.get(charCounterString)["randomCharacter"]
-            flapDiv.children[1].innerText = doc.get(charCounterString)["randomCharacter"]
+
+            flapDiv.children[0].src = whichIcon(doc.get(charCounterString)["serviceAbbr"]);
+            flapDiv.children[0].classList.remove("nodisplay")
+            flapDiv.children[1].innerText = doc.get(charCounterString)["iterationCount"]
+
             flapDiv.children[2].innerText = doc.get(charCounterString)["randomCharacter"]
             flapDiv.children[3].innerText = doc.get(charCounterString)["randomCharacter"]
-            // flapDiv.appendChild(@)
+            flapDiv.children[4].innerText = doc.get(charCounterString)["randomCharacter"]
+            flapDiv.children[5].innerText = doc.get(charCounterString)["randomCharacter"]
+            
             flapDiv.dataset["animated"] = 0; //The animation loop stops when this is set. 
         }
         catch {
@@ -84,8 +106,15 @@
 
         fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-2", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result) )
+            .then(result => showKey())
             .catch(error => handleFetchError(error));
+    }
+
+    function showKey() {
+        let img = document.createElement('img');
+        img.src = "img/key.png"
+        img.className = "key"
+        document.getElementById("key").append(img);
     }
 
     function handleFetchError(result) {
@@ -119,18 +148,20 @@
     pageSetup();
     
     </script>
-    
+    <h1>This a Serverless Rube Goldberg machine</h1>
+    <h2>It's overly complex and accomplishes something relatively simple.</h2>
+    <p>Click "Start the Machine" below and watch a lot of GCP products work together to 
+        guess each character in a sentence.</p>
     <div>
         <div class="instructions">
             <input type="text" id="sentence_input" name="sentence"><br>
-            <label for="sentence">Update the sentence ⬆ to what you would like to match:</label><br>
             <input id ="submitButton" type="submit" value="Start the Machine">
         </div>
     </div>
 
-    <div class="center">
-    </div>
-
-      <script src="js/flapscript.js"></script>
+    <div class="center"></div>
+    <div id="key"></div>
+    <img class="animation" src="img/animation.gif">
+    <script src="js/flapscript.js"></script>
 </body>
 </html>
