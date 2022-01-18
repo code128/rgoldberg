@@ -21,7 +21,7 @@ Guessing all of them in the correct order would take more time then we have left
 # Features to think about adding
 - Another guesser based on a quantum processor
 - Some kind of analytics process to count and display some statistics of usage
-- Custom domain 
+- Mobile Support
 
 # Products to think about integrating
 - Cloud Scheduler (trigger analytics jobs?)
