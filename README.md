@@ -21,7 +21,7 @@ Guessing all of them in the correct order would take more time then we have left
 # Features to think about adding
 - Another guesser based on a quantum processor
 - Some kind of analytics process to count and display some statistics of usage
-- Mobile Support
+
 
 # Products to think about integrating
 - Cloud Scheduler (trigger analytics jobs?)
@@ -35,3 +35,4 @@ Guessing all of them in the correct order would take more time then we have left
 
 # Things that have been added
 - Custom Domain (via CR Domains)
+- Fixed the Safari issue (result.toString() Mobile Support)

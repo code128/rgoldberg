@@ -85,7 +85,7 @@
         // and configure a listener for the correct firestore document
         result = result.slice(1,-1); //Remove the extra '' on the result :shrug
         sentenceDocument = result;
-        let sentenceDocumentID = result.toString().split("/").at(-1) //Get the key at the end of the result 8QIpt49fJ0IuZKUCEDKc
+        let sentenceDocumentID = result.toString().split("/").pop() //Get the key at the end of the result 8QIpt49fJ0IuZKUCEDKc
         
         const unsub = onSnapshot(doc(db, "sentences", sentenceDocumentID), (doc) => {
             addCharacters(doc);
