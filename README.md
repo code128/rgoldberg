@@ -21,6 +21,7 @@ Guessing all of them in the correct order would take more time then we have left
 # Features to think about adding
 - Another guesser based on a quantum processor
 - Some kind of analytics process to count and display some statistics of usage
+- Retry without the window.alert() when starting fails (probably related to cold starts on Cloud Functions) 
 
 
 # Products to think about integrating
@@ -36,3 +37,4 @@ Guessing all of them in the correct order would take more time then we have left
 # Things that have been added
 - Custom Domain (via CR Domains)
 - Fixed the Safari issue (result.toString() Mobile Support)
+- icons not loading (file permissions issue)
