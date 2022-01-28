@@ -28,7 +28,7 @@
         appId: "1:767899227033:web:d38bc60de68b01a3e4f908",
         measurementId: "G-HSNFZN8HB3"
     };
-2
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -80,6 +80,24 @@
         returnCharCounter++
     }
 
+    const fetchWithRetry = async (url, opts, tries=4) => {
+        const errs = [];
+        
+        for (let i = 0; i < tries; i++) {
+            // log for illustration
+            console.log(`trying GET '${url}' [${i + 1} of ${tries}]`);
+            
+            try {
+                return await fetch(url, opts);
+            }
+            catch (err) {
+                errs.push(err);
+            }
+        }
+        
+        throw errs;
+    };
+
     function setupFireStoreDocument(result) {
         // Receives a result like "projects/striking-coil-320623/databases/(default)/documents/sentences/8QIpt49fJ0IuZKUCEDKc"
         // and configure a listener for the correct firestore document
@@ -104,7 +122,7 @@
             },
         };
 
-        fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-2", requestOptions)
+        fetchWithRetry("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-2", requestOptions)
             .then(response => response.text())
             .then(result => showKey())
             .catch(error => handleFetchError(error));
@@ -129,7 +147,7 @@
             method: 'POST'
         };
 
-        fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-1", requestOptions)
+        fetchWithRetry("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-1", requestOptions)
             .then(response => response.text())
             .then(result => setupFireStoreDocument(result))
             .catch(error => handleFetchError(error));
@@ -138,19 +156,6 @@
     }
 
     function pageSetup() {
-        //Ping the CF's in case they're asleep 
-        var requestOptions = {method: 'POST'};
-        fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-1", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log(error));
-
-        fetch("https://us-central1-striking-coil-320623.cloudfunctions.net/cf-step-2", requestOptions)
-        .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log(error));
-            
-
         //Hookup event handling
         document.getElementById("submitButton").onclick = sendSentence;
         document.getElementById("sentence_input").focus();
