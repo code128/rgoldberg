@@ -22,11 +22,12 @@ const app = express();
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz0123456789!\"#$%&'()*+,-./:;<=>?@[] ^_`{|}~";
 
 app.get('/', (req, res) => {
-  if (!req.query.intendedCharacter) { //Send a random character if there's no passed in character intended
-    res.send(alphabet[Math.floor(Math.random() * alphabet.length)])
-  }
-
-  if (!req.query.executionID) {req.query.executionID = "00000"};
+  if (!req.query.intendedCharacter) { 
+    req.query.intendedCharacter = (alphabet[Math.floor(Math.random() * alphabet.length)]);
+}
+if (!req.query.executionID) { 
+    req.query.executionID = "00000";
+}
 
   var match = false;
   var random_letter;
