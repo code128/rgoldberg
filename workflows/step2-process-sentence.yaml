@@ -84,8 +84,8 @@ get_executor:
             - condition:  ${int(randomPick.body) == 3}
               next: return_CF
         - return_AE:
-            return: [https://striking-coil-320623.uc.r.appspot.com,AE]
+            return: [https://serverless-ux-playground.ey.r.appspot.com,AE]
         - return_CF:
-            return: [https://us-central1-striking-coil-320623.cloudfunctions.net/random-letter,CF]
+            return: [https://us-central1-serverless-ux-playground.cloudfunctions.net/cf-random-letter,CF]
         - return_CR:
-            return: [https://cr-random-letter-2itmkz3yga-uc.a.run.app/,CR]
+            return: [https://rg-random-letter-7f55cmy2ga-uc.a.run.app/,CR]
